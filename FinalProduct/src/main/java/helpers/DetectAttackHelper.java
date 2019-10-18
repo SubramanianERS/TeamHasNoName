@@ -18,7 +18,7 @@ public class DetectAttackHelper {
      * @return the response containing the result of the detection.
      * @throws ParseException when exception occurs
      */
-    public static List<Block> detectAttack(List<List<Block>> blockChains) throws ParseException {
+    public static HashMap<String, List<Block>> detectAttack(List<List<Block>> blockChains) throws ParseException {
 
         System.out.println("BlockChains are"+blockChains);
         //Format the transaction data to detect cycles
@@ -50,7 +50,10 @@ public class DetectAttackHelper {
             index++;
         }
 
-        return blockChains.get(longestAuthenticBlockchainIndex);
+        HashMap<String, List<Block>> validatedBlockchains = new HashMap<>();
+        validatedBlockchains.put("valid", blockChains.get(longestAuthenticBlockchainIndex));
+        validatedBlockchains.put("invalid", blockChains.get(longestAuthenticBlockchainIndex == 0 ? 1 : 0));
+        return validatedBlockchains;
     }
 
     /**

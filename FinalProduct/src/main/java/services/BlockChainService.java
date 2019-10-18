@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ import java.util.List;
 public class BlockChainService {
 
     @RequestMapping(method = RequestMethod.POST)
-    public List<Block> postIndex(@RequestBody List<List<Transaction>> transactions) throws ParseException {
+    public HashMap<String, List<Block>> postIndex(@RequestBody List<List<Transaction>> transactions) throws ParseException {
 
         return BlockChainDelegate.createBlockChain(transactions);
     }
